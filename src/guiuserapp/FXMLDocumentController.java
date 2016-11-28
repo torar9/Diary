@@ -14,7 +14,6 @@
 package guiuserapp;
 
 import guiuserapp.Database.Database;
-import java.lang.Exception;
 import guiuserapp.User.UserData;
 import java.net.URL;
 import java.util.ResourceBundle;
