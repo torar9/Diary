@@ -24,6 +24,7 @@ import javafx.stage.Stage;
  *
  * @author Tomáš Silber
  */
+public class Diary extends Application
 {   
     @Override
     public void start(Stage stage) throws Exception 
