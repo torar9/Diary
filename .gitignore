@@ -2,7 +2,7 @@
 
 #Ignore useless
 dist/
-build/
+build/private/
 nbproject/
 
 # Mobile Tools for Java (J2ME)
