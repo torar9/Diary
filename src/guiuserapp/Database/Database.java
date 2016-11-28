@@ -24,6 +24,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
+ *  Store user data into file
  * @author Tomáš Silber
  */
 public class Database

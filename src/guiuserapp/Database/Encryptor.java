@@ -23,7 +23,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 
 /**
- *
+ *  Encrypr and decrypt text with AES decryption
  * @author Tomáš Silber
  */
 public class Encryptor 
