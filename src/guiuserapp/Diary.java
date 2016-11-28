@@ -21,7 +21,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
- *
+ *  Main class
  * @author Tomáš Silber
  */
 public class Diary extends Application
