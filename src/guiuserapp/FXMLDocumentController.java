@@ -49,7 +49,7 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private Button Save_button;
     
-    private UserData safe = new UserData();
+    private UserData safe;
 
     public FXMLDocumentController()
     {

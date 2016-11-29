@@ -22,11 +22,6 @@ public class UserData
     private String DataName;
     private String text;
     
-    public UserData()
-   {
-       this("", "");
-   }
-    
     /**
      * Constructor which sets name of the data and text
      * @param DataName Name of data
