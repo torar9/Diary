@@ -13,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="613.0" prefWidth="550.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guiuserapp.FXMLDocumentController">
    <children>
-      <Text layoutX="196.0" layoutY="582.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" © Tomáš Silber version">
+      <Text layoutX="196.0" layoutY="582.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" © Tomáš Silber">
          <font>
             <Font size="13.0" />
          </font>
