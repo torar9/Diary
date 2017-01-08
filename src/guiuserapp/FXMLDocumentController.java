@@ -63,6 +63,8 @@ public class FXMLDocumentController implements Initializable
         try
         {
             database.editData(safe, data);
+             clear();
+             Save_button.setVisible(false);
         }
         catch(Exception e)
         {
