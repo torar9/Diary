@@ -167,7 +167,7 @@ public class userDataDatabase implements IDatabase
                 System.err.println("Error, unable to save." + e);
                 return false;
             }
-        }     
+        }
         else
         {
             System.err.println("File already exists!");
@@ -204,7 +204,7 @@ public class userDataDatabase implements IDatabase
                     if(pos > 0)
                     name = name.substring(0, pos);
                      
-                    String prefileText = "";
+                    String prefileText;
                     String fileText = "";
                     try(BufferedReader fileBufferR = new BufferedReader(new FileReader(location + File.separator + file.getName())))
                     {  
@@ -212,7 +212,7 @@ public class userDataDatabase implements IDatabase
                         {
                             fileText += prefileText + "\n";
                         }
-                    
+                        
                         fileText = Encryptor.Decrypt(fileText);
                     
                         UserData userDataAdd = new UserData(name, fileText);
