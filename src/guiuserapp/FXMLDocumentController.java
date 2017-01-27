@@ -14,6 +14,7 @@
 package guiuserapp;
 
 import guiuserapp.Database.IDatabase;
+import guiuserapp.Database.userDataDatabase;
 import guiuserapp.User.UserData;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,6 +54,7 @@ public class FXMLDocumentController implements Initializable
 
     public FXMLDocumentController()
     {
+        database = new userDataDatabase();
     }
     
     @FXML
