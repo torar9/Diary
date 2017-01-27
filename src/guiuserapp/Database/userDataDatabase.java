@@ -27,21 +27,21 @@ import javafx.collections.ObservableList;
  *  Store user data into file
  * @author Tomáš Silber
  */
-public class Database implements IDatabase
+public class userDataDatabase implements IDatabase
 {
-    private String DataLocation;
+    private String location;
     private final ObservableList<UserData> content = FXCollections.observableArrayList();
     private final ArrayList<String> dataNames = new ArrayList<>();
     private UserData deletedContent;
     
-    public Database()
+    public userDataDatabase()
     {
         setPath();
     }
     
-    public Database(String path)
+    public userDataDatabase(String path)
     {
-        DataLocation = path;
+        location = path;
     }
     
     public void addData(UserData data) throws Exception
@@ -109,7 +109,7 @@ public class Database implements IDatabase
      */
     private boolean removeFile(UserData userData)
     {
-        File floc = new File(DataLocation + File.separator + userData.getName() + ".txt");
+        File floc = new File(location + File.separator + userData.getName() + ".txt");
         return floc.delete();
     }
     
@@ -123,8 +123,8 @@ public class Database implements IDatabase
     {
         if(!newData.getName().contentEquals(oldData.getName()))
         {
-            File floc = new File(DataLocation + File.separator + oldData.getName() + ".txt");
-            floc.renameTo(new File(DataLocation + File.separator + newData.getName() + ".txt"));
+            File floc = new File(location + File.separator + oldData.getName() + ".txt");
+            floc.renameTo(new File(location + File.separator + newData.getName() + ".txt"));
             
             content.remove(oldData);
             content.add(newData);
@@ -150,10 +150,10 @@ public class Database implements IDatabase
     {
         name = name.toLowerCase();
         
-        File fUserData = new File(DataLocation + File.separator + name);
+        File fUserData = new File(location + File.separator + name);
         if(!fUserData.exists())
         {
-            try(BufferedWriter fileBufferW = new BufferedWriter(new FileWriter(DataLocation + File.separator + name + ".txt")))
+            try(BufferedWriter fileBufferW = new BufferedWriter(new FileWriter(location + File.separator + name + ".txt")))
             {
                 text = Encryptor.Encrypt(text);
                 
@@ -187,7 +187,7 @@ public class Database implements IDatabase
  */
     private void loadFiles()
     {
-        File fUserData = new File(DataLocation + File.separator);
+        File fUserData = new File(location + File.separator);
         if(!fUserData.exists())
         {
             fUserData.mkdirs();
@@ -206,7 +206,7 @@ public class Database implements IDatabase
                      
                     String prefileText = "";
                     String fileText = "";
-                    try(BufferedReader fileBufferR = new BufferedReader(new FileReader(DataLocation + File.separator + file.getName())))
+                    try(BufferedReader fileBufferR = new BufferedReader(new FileReader(location + File.separator + file.getName())))
                     {  
                         while((prefileText = fileBufferR.readLine()) != null)
                         {
@@ -229,18 +229,18 @@ public class Database implements IDatabase
         }
     }
     
-    /**
+        /**
      * Sets path to save/load destination
      */
-    private void setPath()
+    protected void setPath()
     {
         String OS = System.getProperty("os.name").toUpperCase();
         
         if(OS.contains("LINUX"))
-            DataLocation = System.getProperty("user.home") + File.separator + ".torar/" + "save";
+            location = System.getProperty("user.home") + File.separator + ".torar/" + "save";
         else if(OS.contains("WIN") )
-            DataLocation = System.getenv("APPDATA") + File.separator + "torar/" + "save";
+            location = System.getenv("APPDATA") + File.separator + "torar/" + "save";
         else
-            DataLocation = System.getProperty("user.home") + File.separator + ".torar/" + "save";
+            location = System.getProperty("user.home") + File.separator + ".torar/" + "save";
     }
 }

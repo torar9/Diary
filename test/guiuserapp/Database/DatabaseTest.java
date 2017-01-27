@@ -34,7 +34,6 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DatabaseTest 
 {
-    private static Database database;
     
     private static UserData data;
     private static UserData newData;
@@ -48,7 +47,6 @@ public class DatabaseTest
     @BeforeClass
     public static void setUpClass() 
     {
-        database = new Database();
         list = database.getContents();
         data = new UserData("test name+ěčšě","Text ěščěščěš ");
         newData = new UserData("new","new");
@@ -77,7 +75,6 @@ public class DatabaseTest
     }
 
     /**
-     * Test of addData method, of class Database.
      */
     @Test
     public void testAddData()
@@ -100,7 +97,6 @@ public class DatabaseTest
     }
     
     /**
-     * Test of addData method, of class Database.
      */
     @Test
     public void testEditData()
@@ -122,7 +118,6 @@ public class DatabaseTest
     }
     
     /**
-     * Test of removeData method, of class Database.
      */
     @Test
     public void testRemoveData()
@@ -144,7 +139,6 @@ public class DatabaseTest
     }
     
     /**
-     * Test of removeData method, of class Database.
      */
     @Test
     public void testRestoreData()
