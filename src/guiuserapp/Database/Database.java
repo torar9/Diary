@@ -27,12 +27,12 @@ import javafx.collections.ObservableList;
  *  Store user data into file
  * @author Tomáš Silber
  */
-public class Database
+public class Database implements IDatabase
 {
     private String DataLocation;
-    private static ObservableList<UserData> content = FXCollections.observableArrayList();
-    private static ArrayList<String> dataNames = new ArrayList<>();
-    static private UserData deletedContent;
+    private final ObservableList<UserData> content = FXCollections.observableArrayList();
+    private final ArrayList<String> dataNames = new ArrayList<>();
+    private UserData deletedContent;
     
     public Database()
     {
@@ -44,11 +44,6 @@ public class Database
         DataLocation = path;
     }
     
-    /**
-     * Adds new data
-     * @param data
-     * @throws java.lang.Exception
-     */
     public void addData(UserData data) throws Exception
     {
         if(isSaved(data.getName()))
@@ -65,12 +60,7 @@ public class Database
         content.add(data);
         dataNames.add(data.getName());
     }
-
-    /**
-     * Removes data
-     * @param data
-     * @throws java.lang.Exception
-     */
+    
     public void removeData(UserData data) throws Exception 
     {
         if(data == null)
@@ -86,21 +76,11 @@ public class Database
             throw new Exception("Unable to delete data!");
     }
     
-    /**
-     * Restore previous deletes data 
-     * @throws java.lang.Exception
-     */
     public void restoreContent() throws Exception
     {
         addData(deletedContent);
     }
 
-    /**
-     * Replace the old data
-     * @param oldData
-     * @param newData
-     * @throws java.lang.Exception
-     */
     public void editData(UserData oldData, UserData newData) throws Exception 
     {
         if(isSaved(newData.getName()) && !oldData.getName().contains(newData.getName()))
@@ -116,10 +96,6 @@ public class Database
             editFile(oldData, newData);
     }
 
-    /**
-     * Returns list of user data
-     * @return 
-     */
     public ObservableList<UserData> getContents() 
     {
         loadFiles();

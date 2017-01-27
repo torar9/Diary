@@ -14,6 +14,7 @@
 package guiuserapp;
 
 import guiuserapp.Database.Database;
+import guiuserapp.Database.IDatabase;
 import guiuserapp.User.UserData;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,7 +31,7 @@ import javafx.scene.text.Text;
  */
 public class FXMLDocumentController implements Initializable
 {
-    private final Database database;
+    private final IDatabase database;
 
     @FXML
     private TextField name;
