@@ -14,7 +14,7 @@
 package guiuserapp.User;
 
 /**
- * Class is used to store data, the class is used to pack the datas.
+ * The class is used to pack the user datas.
  * @author Tomáš Silber
  */
 public class UserData 
