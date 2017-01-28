@@ -26,7 +26,8 @@
 
 <h3>Package: Database</h3>
 <ul>
-  <li><b>Database</b>.java - Class is used for saving, loading and removing user data.</li>
+<li><b>IDatabase</b>.java - Database Interface</li>
+  <li><b>userDataDatabase</b>.java - Class is used for saving, loading and removing user data.</li>
   <li><b>Encryptor</b>.java - Static class for encrypting and decrypting text.</li>
 </ul>
 
@@ -44,7 +45,7 @@
 <hr>
 
 <h2>Author, License</h2>
-<p><b>Author: Tom� Silber</b></p>
+<p><b>Author: Tomáš Silber</b></p>
 
 <p>This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
