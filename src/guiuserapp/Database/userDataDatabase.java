@@ -230,7 +230,7 @@ public class userDataDatabase implements IDatabase
         }
     }
     
-        /**
+     /**
      * Sets path to save/load destination
      */
     private void setPath()
