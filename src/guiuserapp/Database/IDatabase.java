@@ -22,7 +22,7 @@ import javafx.collections.ObservableList;
 /**
  * Interface for database, contains basic operations for adding, removing, restoring user data.
  * Methods throws Exception when user input is not valid. 
- * Exception message contains message for user.
+ * Exception contains message for user.
  * @author Tomáš Silber
  */
 public interface IDatabase 
