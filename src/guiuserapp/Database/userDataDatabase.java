@@ -233,7 +233,7 @@ public class userDataDatabase implements IDatabase
         /**
      * Sets path to save/load destination
      */
-    protected void setPath()
+    private void setPath()
     {
         String OS = System.getProperty("os.name").toUpperCase();
         
