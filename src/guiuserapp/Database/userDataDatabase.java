@@ -201,7 +201,7 @@ public class userDataDatabase implements IDatabase
                  if(file.isFile())
                 {
                     String name = file.getName();
-                   int pos = name.lastIndexOf(".");
+                    int pos = name.lastIndexOf(".");
                     if(pos > 0)
                     name = name.substring(0, pos);
                      
