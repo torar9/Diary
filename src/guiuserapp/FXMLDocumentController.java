@@ -32,7 +32,7 @@ import javafx.scene.text.Text;
 public class FXMLDocumentController implements Initializable
 {
     private final IDatabase database;
-
+    
     @FXML
     private TextField name;
     @FXML
@@ -40,13 +40,7 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private TextArea text;
     @FXML
-    private Button Add_button;
-    @FXML
-    private Button Remove_button;
-    @FXML
     private Text System_print;
-    @FXML
-    private Button Undo_button;
     @FXML
     private Button Save_button;
     
@@ -146,6 +140,7 @@ public class FXMLDocumentController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        
         nameList.setItems(database.getContents());
         Save_button.setVisible(false);
     }

@@ -26,10 +26,13 @@ import javafx.stage.Stage;
  */
 public class Diary extends Application
 {   
+    public static Stage stage;
+    
     @Override
     public void start(Stage stage) throws Exception 
     {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/services/login.fxml"));
         
         Scene scene = new Scene(root);
         
@@ -37,6 +40,7 @@ public class Diary extends Application
         stage.setScene(scene);
         stage.setTitle("Diary");
         stage.show();
+        this.stage = stage;
     }
 
     /**

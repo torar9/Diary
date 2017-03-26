@@ -13,6 +13,7 @@
  */
 package guiuserapp.Database;
 
+import guiuserapp.User.User;
 import guiuserapp.User.UserData;
 
 import java.io.BufferedReader;
@@ -30,10 +31,11 @@ import javafx.collections.ObservableList;
  */
 public class userDataDatabase implements IDatabase
 {
-    private String location;
+    private String dataLocation;
     private final ObservableList<UserData> content = FXCollections.observableArrayList();
     private final ArrayList<String> dataNames = new ArrayList<>();
     private UserData deletedContent;
+    private User user = User.getInstance();
     
     public userDataDatabase()
     {
@@ -42,9 +44,10 @@ public class userDataDatabase implements IDatabase
     
     public userDataDatabase(String path)
     {
-        location = path;
+        dataLocation = path;
     }
     
+    @Override
     public void addData(UserData data) throws Exception
     {
         if(isSaved(data.getName()))
@@ -62,6 +65,7 @@ public class userDataDatabase implements IDatabase
         dataNames.add(data.getName());
     }
     
+    @Override
     public void removeData(UserData data) throws Exception 
     {
         if(data == null)
@@ -77,11 +81,13 @@ public class userDataDatabase implements IDatabase
             throw new Exception("Unable to delete data!");
     }
     
+    @Override
     public void restoreContent() throws Exception
     {
         addData(deletedContent);
     }
 
+    @Override
     public void editData(UserData oldData, UserData newData) throws Exception 
     {
         if(isSaved(newData.getName()) && !oldData.getName().contains(newData.getName()))
@@ -97,6 +103,7 @@ public class userDataDatabase implements IDatabase
             editFile(oldData, newData);
     }
 
+    @Override
     public ObservableList<UserData> getContents() 
     {
         loadFiles();
@@ -110,7 +117,7 @@ public class userDataDatabase implements IDatabase
      */
     private boolean removeFile(UserData userData)
     {
-        File floc = new File(location + File.separator + userData.getName() + ".txt");
+        File floc = new File(dataLocation + File.separator + userData.getName() + ".txt");
         return floc.delete();
     }
     
@@ -124,8 +131,8 @@ public class userDataDatabase implements IDatabase
     {
         if(!newData.getName().contentEquals(oldData.getName()))
         {
-            File floc = new File(location + File.separator + oldData.getName() + ".txt");
-            floc.renameTo(new File(location + File.separator + newData.getName() + ".txt"));
+            File floc = new File(dataLocation + File.separator + oldData.getName() + ".txt");
+            floc.renameTo(new File(dataLocation + File.separator + newData.getName() + ".txt"));
             
             content.remove(oldData);
             content.add(newData);
@@ -151,15 +158,14 @@ public class userDataDatabase implements IDatabase
     {
         name = name.toLowerCase();
         
-        File fUserData = new File(location + File.separator + name);
+        File fUserData = new File(dataLocation + File.separator + name);
         if(!fUserData.exists())
         {
-            try(BufferedWriter fileBufferW = new BufferedWriter(new FileWriter(location + File.separator + name + ".txt")))
+            try(BufferedWriter fileBufferW = new BufferedWriter(new FileWriter(dataLocation + File.separator + name + ".txt")))
             {
                 text = Encryptor.Encrypt(text);
                 
                 fileBufferW.write(text);
-                fileBufferW.flush();
                 fileBufferW.close();
             }
             
@@ -188,43 +194,37 @@ public class userDataDatabase implements IDatabase
  */
     private void loadFiles()
     {
-        File fUserData = new File(location + File.separator);
-        if(!fUserData.exists())
+        File fUserData = new File(dataLocation + File.separator);
+        
+        File[] listOfFiles = fUserData.listFiles();
+        for(File file : listOfFiles)
         {
-            fUserData.mkdirs();
-        }
-        else
-        {
-            File[] listOfFiles = fUserData.listFiles();
-            for(File file : listOfFiles)
+            if(file.isFile())
             {
-                 if(file.isFile())
-                {
-                    String name = file.getName();
-                    int pos = name.lastIndexOf(".");
-                    if(pos > 0)
+                String name = file.getName();
+                int pos = name.lastIndexOf(".");
+                if(pos > 0)
                     name = name.substring(0, pos);
-                     
-                    String prefileText;
-                    String fileText = "";
-                    try(BufferedReader fileBufferR = new BufferedReader(new FileReader(location + File.separator + file.getName())))
-                    {  
-                        while((prefileText = fileBufferR.readLine()) != null)
-                        {
-                            fileText += prefileText + "\n";
-                        }
-                        
-                        fileText = Encryptor.Decrypt(fileText);
-                    
-                        UserData userDataAdd = new UserData(name, fileText);
-                        content.add(userDataAdd);
-                        dataNames.add(userDataAdd.getName());
-                    }
-                 
-                    catch(Exception e)
+                
+                String prefileText;
+                String fileText = "";
+                try(BufferedReader fileBufferR = new BufferedReader(new FileReader(dataLocation + File.separator + file.getName())))
+                {  
+                    while((prefileText = fileBufferR.readLine()) != null)
                     {
-                        System.err.println("Error, unable to open/save file." + e);
+                        fileText += prefileText + "\n";
                     }
+                    
+                    fileText = Encryptor.Decrypt(fileText);
+                    
+                    UserData userDataAdd = new UserData(name, fileText);
+                    content.add(userDataAdd);
+                    dataNames.add(userDataAdd.getName());
+                }
+                
+                catch(Exception e)
+                {
+                    System.err.println("Error, unable to open/save file." + e);
                 }
             }
         }
@@ -238,10 +238,14 @@ public class userDataDatabase implements IDatabase
         String OS = System.getProperty("os.name").toUpperCase();
         
         if(OS.contains("LINUX"))
-            location = System.getProperty("user.home") + File.separator + ".torar/" + "save";
+            dataLocation = System.getProperty("user.home") + File.separator + ".torar/" + "save/" + user.getName();
         else if(OS.contains("WIN") )
-            location = System.getenv("APPDATA") + File.separator + "torar/" + "save";
+            dataLocation = System.getenv("APPDATA") + File.separator + "torar/" + "save/" + user.getName();
         else
-            location = System.getProperty("user.home") + File.separator + ".torar/" + "save";
+            dataLocation = System.getProperty("user.home") + File.separator + ".torar/" + "save/" + user.getName();
+        
+        File des = new File(dataLocation);
+        if(!des.exists())
+            des.mkdirs();
     }
 }
