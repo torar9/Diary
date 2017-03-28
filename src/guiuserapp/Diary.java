@@ -40,6 +40,7 @@ public class Diary extends Application
         stage.setScene(scene);
         stage.setTitle("Diary");
         stage.show();
+        
         this.stage = stage;
     }
 

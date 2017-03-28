@@ -156,10 +156,12 @@ public class UserService
             writer.write(nick);
             writer.write(';');
             writer.write(passwd);
+            writer.newLine();
             writer.close();
         }
         catch(Exception ex)
         {
+            System.err.println(ex);
             throw new Exception("Unable to save user!");
         }
     }
