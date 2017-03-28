@@ -32,7 +32,7 @@
             <TextField fx:id="nickField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" onAction="#handleLogin_button" text="Login" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Button mnemonicParsing="false" onAction="#handleRegister_button" text="Register" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Text fx:id="LerrorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="296.13671875" GridPane.columnIndex="1" />
+            <Text fx:id="errorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="296.13671875" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </children>
