@@ -24,7 +24,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.util.Arrays;
 
 /**
  *Is used to login and register user
@@ -56,7 +55,6 @@ public class UserService
                 if(index == -1)
                     continue;
                 
-                //String user = line.substring(0, index);
                 if(line.substring(0, index).equals(nick))
                 {
                     String pswd = line.substring(index + 1);
@@ -106,7 +104,7 @@ public class UserService
         if(nick.length() == 0 || passwd.length() == 0 || passwdAgain.length() == 0)
             throw new Exception("Invalid input!");
         
-        if(passwd.equals(passwdAgain))//if(Arrays.equals(passwd, passwdAgain))
+        if(passwd.equals(passwdAgain))
         {
             if(exists(nick))
                 throw new Exception("User already exists!");
@@ -114,8 +112,6 @@ public class UserService
             {
             	MessageDigest engine = MessageDigest.getInstance("SHA-256");
             	String sha = new String(engine.digest(passwd.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
-            	//byte[] sha = engine.digest(passwd.toString(StandardCharsets.UTF_8).getBytes());
-            	//engine.digest(passwd.getBytes(StandardCharsets.UTF_8))
                 createUser(nick, sha);
             }
         }
