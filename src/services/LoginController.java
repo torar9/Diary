@@ -49,7 +49,7 @@ public class LoginController implements Initializable
     private void handleLogin_button() throws IOException
     {
         UserService serv = new UserService();
-        if(serv.login(nickField.getText(), passwdField.getText().toCharArray()))
+        if(serv.login(nickField.getText(), passwdField.getText()))
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/guiuserapp/FXMLDocument.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();

@@ -57,7 +57,7 @@ public class RegisterController extends LoginController
         UserService usr = new UserService();
         try
         {
-            usr.register(nickField.getText(), passwdField.getText().toCharArray(), passwdFieldAgain.getText().toCharArray());
+            usr.register(nickField.getText(), passwdField.getText(), passwdFieldAgain.getText());
         }
         catch(Exception ex)
         {

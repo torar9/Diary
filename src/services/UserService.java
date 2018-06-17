@@ -22,6 +22,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.Arrays;
 
 /**
@@ -43,7 +45,7 @@ public class UserService
      * @param passwd
      * @return 
      */
-    private boolean authenticate(String nick, char[] passwd)
+    private boolean authenticate(String nick, String passwd)
     {
         try(BufferedReader reader = new BufferedReader(new FileReader(userPath + "/users")))
         {
@@ -54,11 +56,14 @@ public class UserService
                 if(index == -1)
                     continue;
                 
-                String user = line.substring(0, index);
+                //String user = line.substring(0, index);
                 if(line.substring(0, index).equals(nick))
                 {
-                    char[] pswd = line.substring(index + 1).toCharArray();
-                    if(Arrays.equals(pswd, passwd))
+                    String pswd = line.substring(index + 1);
+                    
+                    MessageDigest engine = MessageDigest.getInstance("SHA-256");
+                	String sha = new String(engine.digest(passwd.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+                    if(pswd.equals(sha))
                         return true;
                 }
             }
@@ -77,12 +82,12 @@ public class UserService
      * @param passwd
      * @return 
      */
-    public boolean login(String nick, char[] passwd)
+    public boolean login(String nick, String passwd)
     {
         if(authenticate(nick, passwd))
         {
             User user = User.getInstance();
-            user.setData(nick, passwd);
+            user.setData(nick);
             return true;
         }
         else
@@ -96,18 +101,22 @@ public class UserService
      * @param passwdAgain user password again
      * @throws Exception Exception if something went wrong, contains message for user.
      */
-    public void register(String nick, char[] passwd, char[] passwdAgain) throws Exception
+    public void register(String nick, String passwd, String passwdAgain) throws Exception
     {
-        if(nick.length() == 0 || passwd.length == 0 || passwdAgain.length == 0)
+        if(nick.length() == 0 || passwd.length() == 0 || passwdAgain.length() == 0)
             throw new Exception("Invalid input!");
         
-        if(Arrays.equals(passwd, passwdAgain))
+        if(passwd.equals(passwdAgain))//if(Arrays.equals(passwd, passwdAgain))
         {
             if(exists(nick))
                 throw new Exception("User already exists!");
             else
             {
-                createUser(nick, passwd);
+            	MessageDigest engine = MessageDigest.getInstance("SHA-256");
+            	String sha = new String(engine.digest(passwd.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+            	//byte[] sha = engine.digest(passwd.toString(StandardCharsets.UTF_8).getBytes());
+            	//engine.digest(passwd.getBytes(StandardCharsets.UTF_8))
+                createUser(nick, sha);
             }
         }
         else
@@ -149,7 +158,7 @@ public class UserService
      * @param passwd
      * @throws Exception if something went wrong, contains message for user.
      */
-    private void createUser(String nick, char[] passwd) throws Exception
+    private void createUser(String nick, String passwd) throws Exception
     {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(userPath + "/users", true)))
         {

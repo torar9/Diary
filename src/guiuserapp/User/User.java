@@ -23,15 +23,13 @@ package guiuserapp.User;
 public class User
 {
     private String nick;
-    private char[] passwd;
     private static User instance = null;
     
     private User(){}
     
-    private User(String nick, char[] passwd)
+    private User(String nick)
     { 
         this.nick = nick; 
-        this.passwd = passwd;
     }
     
     public static User getInstance()
@@ -42,10 +40,9 @@ public class User
             return instance;
     }
     
-    public void setData(String nick, char[] passwd)
+    public void setData(String nick)
     {
         this.nick = nick; 
-        this.passwd = passwd;
     }
     
     public String getName()

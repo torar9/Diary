@@ -41,7 +41,7 @@ public class Diary extends Application
         stage.setTitle("Diary");
         stage.show();
         
-        this.stage = stage;
+        Diary.stage = stage;
     }
 
     /**
