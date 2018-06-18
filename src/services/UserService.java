@@ -116,7 +116,7 @@ public class UserService
             }
         }
         else
-            throw new Exception("Password does not match!");
+            throw new Exception("Passwords does not match!");
     }
     
     /**
@@ -149,7 +149,7 @@ public class UserService
     }
     
     /**
-     * 
+     * Append new user into file, if file does not exists it will try to create new one.
      * @param nick
      * @param passwd
      * @throws Exception if something went wrong, contains message for user.

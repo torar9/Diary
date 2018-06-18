@@ -122,7 +122,7 @@ public class FXMLDocumentController implements Initializable
     }
 
     /**
-     * Methos is used to remove texts from text fields
+     * Method is used to remove texts from text fields
      */
     private void clear()
     {
