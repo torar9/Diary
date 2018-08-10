@@ -5,7 +5,7 @@
 <p>The text inside file is encrypted with AES encryption.</p>
 
 <h2>Specification</h2>
-<p>Program is written in Netbeans IDE(v8.2) using JavaFX (JavaJDK v8) using FXML format.</p>
+<p>Program is written in Netbeans IDE(v8.2) using JavaFX (JavaJDK v8), user data tare stored in FXML format.</p>
 
 <h3>Libraries</h3>
 <ul>
